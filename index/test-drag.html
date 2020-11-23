@@ -2,12 +2,22 @@
 <html>
     <head>
         <script src="assets/vue.js"></script>
+        <script src="assets/test-drag/js/method.js"></script>
         <link href="./assets/test-drag/css/main.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <div id="wrap">
             <div id="container">
-                <div id="box" @mousedown="onMousedown" :style="style.box"></div>
+                <div id="box-wrap" :style="style.box">
+                    <div id="box" @mousedown="onMousedown"></div>
+                    <div
+                        v-for="i in element.edge"
+                        :key="i.id"
+                        :class="`edge ${i.cls}`"
+                        @mousedown="onMousedownEdge(i.cls, ...arguments)"
+                    >
+                    </div>
+                </div>
             </div>
         </div>
         <script src="assets/test-drag/js/main.js"></script>
