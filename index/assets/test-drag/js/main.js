@@ -116,73 +116,46 @@ new Vue({
             const {width, height} = box.getBoundingClientRect()
 
             if(this.box.topLeft){
-                const cwidth =  this.box.x - e.clientX + width
-                const cheight = this.box.y - e.clientY + height
-
                 const top = this.box.y - e.clientY
                 const left = this.box.x - e.clientX
 
-                this.box.x = e.clientX
-                this.box.y = e.clientY
+                this.resizeBox(left, top, width, height, e)
 
-                // if(box.offsetLeft - left <= 0) return
-                // if(box.offsetTop - top <= 0) return
-
-                this.style.box.width = Math.min(cwidth, 500) + 'px'
-                this.style.box.height = Math.min(cheight, 500) + 'px'
                 this.style.box.top = (box.offsetTop - top) + 'px'
                 this.style.box.left = (box.offsetLeft - left) + 'px'
             }
             if(this.box.topRight){
-                const cwidth = e.clientX - this.box.x + width
-                const cheight = this.box.y - e.clientY + height
-
                 const top = this.box.y - e.clientY
                 const left = e.clientX - this.box.x
 
-                this.box.x = e.clientX
-                this.box.y = e.clientY
+                this.resizeBox(left, top, width, height, e)
 
-                // if(box.offsetLeft - left >= 500 - width) return
-                // if(box.offsetTop - top <= 0) return
-
-                this.style.box.width = Math.min(cwidth, 500) + 'px'
-                this.style.box.height = Math.min(cheight, 500) + 'px'
                 this.style.box.top = (box.offsetTop - top) + 'px'
             }
             if(this.box.bottomLeft){
-                const cwidth =  this.box.x - e.clientX + width
-                const cheight = e.clientY - this.box.y + height
-
                 const top = e.clientY - this.box.y
                 const left = this.box.x - e.clientX
 
-                this.box.x = e.clientX
-                this.box.y = e.clientY
+                this.resizeBox(left, top, width, height, e)
 
-                // if(box.offsetLeft - left <= 0) return
-                // if(box.offsetTop - top >= 500 - height) return
-
-                this.style.box.width = Math.min(cwidth, 500) + 'px'
-                this.style.box.height = Math.min(cheight, 500) + 'px'
                 this.style.box.left = (box.offsetLeft - left) + 'px'
             }
             if(this.box.bottomRight){
-                const cwidth = e.clientX - this.box.x + width
-                const cheight = e.clientY - this.box.y + height
-
                 const top = e.clientY - this.box.y
                 const left = e.clientX - this.box.x 
-
-                this.box.x = e.clientX
-                this.box.y = e.clientY
-
-                // if(box.offsetLeft - left >= 500 - width) return
-                // if(box.offsetTop - top >= 500 - height) return
-
-                this.style.box.width = Math.min(cwidth, 500) + 'px'
-                this.style.box.height = Math.min(cheight, 500) + 'px'
+                
+                this.resizeBox(left, top, width, height, e)
             }
+        },
+        resizeBox(cw, cy, width, height, e){
+            const cwidth = cw + width
+            const cheight = cy + height
+
+            this.box.x = e.clientX
+            this.box.y = e.clientY
+            
+            this.style.box.width = Math.min(cwidth, 500) + 'px'
+            this.style.box.height = Math.min(cheight, 500) + 'px'
         },
         onMouseupEdge(){
             this.box.topLeft = false
