@@ -169,6 +169,24 @@ new Vue({
             this.box.bottomLeft = false
             this.box.bottomRight = false
         },
+        getPosition(){
+            const box = document.querySelector('#box-wrap')
+            const {width, height} = box.getBoundingClientRect()
+            
+            const topLeft = {x: box.offsetLeft, y: box.offsetTop}
+            const topRight = {x: box.offsetLeft + width, y: box.offsetTop}
+            const bottomLeft = {x: box.offsetLeft, y: box.offsetTop + height}
+            const bottomRight = {x: box.offsetLeft + width, y: box.offsetTop + height}
+
+            console.log("x: ", box.offsetLeft)
+            console.log("y: ", box.offsetTop)
+            console.log("width: ", width)
+            console.log("height: ", height)
+            console.log("topLeft: ", topLeft)
+            console.log("topRight: ", topRight)
+            console.log("bottomLeft: ", bottomLeft)
+            console.log("bottomRight: ", bottomRight)
+        },
         render(){
             const box = document.querySelector('#box-wrap')
             const {width, height} = box.getBoundingClientRect()
